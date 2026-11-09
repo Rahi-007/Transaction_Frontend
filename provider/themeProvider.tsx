@@ -1,10 +1,24 @@
-// import * as React from "react";
-// import { ThemeProvider as NextThemesProvider, ThemeProviderProps } from "next-themes";
+"use client";
 
-// export function ThemeProvider({ children, ...props }: React.PropsWithChildren<ThemeProviderProps>) {
-//   return (
-//     <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange {...props}>
-//       {children}
-//     </NextThemesProvider>
-//   );
-// }
+import * as React from "react";
+import {
+    ThemeProvider as NextThemesProvider,
+    ThemeProviderProps,
+} from "next-themes";
+
+export function ThemeProvider({
+    children,
+    ...props
+}: React.PropsWithChildren<ThemeProviderProps>) {
+    return (
+        <NextThemesProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+            {...props}
+        >
+            {children}
+        </NextThemesProvider>
+    );
+}

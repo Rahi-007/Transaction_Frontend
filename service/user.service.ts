@@ -1,50 +1,50 @@
 import { RTKApi } from "@/context/rtk-query";
-import { IAddUser, IUpdateUser, IUser } from "@/interface/user.interface";
+import { IAddTransition, ITransition } from "@/interface/transaction.interface";
 
-export const userApi = RTKApi.injectEndpoints({
+export const transitionApi = RTKApi.injectEndpoints({
   endpoints: build => ({
-    addUser: build.mutation<IUser, IAddUser>({
+    addTransition: build.mutation<ITransition, IAddTransition>({
       query: data => ({
-        url: "v1/user",
+        url: "v1/transition",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Transition"],
     }),
 
-    updateUser: build.mutation<IUser, { id: string; data: Partial<IUpdateUser> }>({
+    updateTransition: build.mutation<ITransition, { id: string; data: Partial<IAddTransition> }>({
       query: ({ id, data }) => ({
-        url: `v1/user/${id}`,
+        url: `v1/transition/${id}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Transition"],
     }),
 
-    deleteUser: build.mutation<void, string>({
+    deleteTransition: build.mutation<void, string>({
       query: id => ({
-        url: `v1/user/${id}`,
+        url: `v1/transition/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Transition"],
     }),
 
-    getUserById: build.query<IUser, string>({
-      query: id => `v1/user/${id}`,
-      providesTags: (_result, _error, id) => [{ type: "User", id }],
+    getTransitionById: build.query<ITransition, string>({
+      query: id => `v1/transition/${id}`,
+      providesTags: (_result, _error, id) => [{ type: "Transition", id }],
     }),
 
-    getAllUsers: build.query<IUser[], void>({
-      query: () => "v1/user",
-      providesTags: ["User"],
+    getAllTransitions: build.query<ITransition[], void>({
+      query: () => "v1/transition",
+      providesTags: ["Transition"],
     }),
   }),
 });
 
 export const {
-  useAddUserMutation,
-  useUpdateUserMutation,
-  useDeleteUserMutation,
-  useGetUserByIdQuery,
-  useGetAllUsersQuery
-} = userApi;
+  useAddTransitionMutation,
+  useUpdateTransitionMutation,
+  useDeleteTransitionMutation,
+  useGetTransitionByIdQuery,
+  useGetAllTransitionsQuery
+} = transitionApi;
